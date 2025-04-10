@@ -16,3 +16,4 @@ AUTHORS
 .env_temp
 .faas_debug_tmp
 env.json
+package-lock.json

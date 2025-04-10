@@ -17,11 +17,11 @@ npm run build
 
 # 使用 PM2 启动服务
 # 如果是生产环境，添加 --env production
-# if [ "$NODE_ENV" = "production" ]; then
+if [ "$NODE_ENV" = "production" ]; then
   npx pm2 start ecosystem.config.js --env production
-# else
-#   npx pm2 start ecosystem.config.js
-# fi
+else
+  npx pm2 start ecosystem.config.js
+fi
 
 # 显示运行状态
 npx pm2 status 
