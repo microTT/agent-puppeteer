@@ -1,16 +1,16 @@
 import type { Browser, Page } from 'puppeteer';
 import puppeteer from 'puppeteer';
-import { createCursor } from 'ghost-cursor';
-import { random } from 'lodash';
+// import { createCursor } from 'ghost-cursor';
+// import { random } from 'lodash';
 import { CrawlerOptions, CrawlerResult } from './types';
 
 export class WebCrawler {
   private browser: Browser | null = null;
   private page: Page | null = null;
-  private cursor: any = null;
+  // private cursor: any = null;
   private startTime = 0;
   private readonly MAX_SESSION_TIME = 30 * 60 * 1000; // 30分钟
-  private readonly MAX_RETRIES = 3;
+  // private readonly MAX_RETRIES = 3;
   private readonly DEFAULT_TIMEOUT = 30000;
 
   async init(options: CrawlerOptions = {}) {
@@ -106,7 +106,7 @@ export class WebCrawler {
         });
 
         // 初始化鼠标轨迹生成器
-        this.cursor = createCursor(this.page);
+        // this.cursor = createCursor(this.page);
 
         // 设置请求拦截
         await this.page.setRequestInterception(true);
@@ -129,58 +129,58 @@ export class WebCrawler {
     }
   }
 
-  // 模拟人类滚动行为
-  private async humanScroll() {
-    if (!this.page) return;
+  // // 模拟人类滚动行为
+  // private async humanScroll() {
+  //   if (!this.page) return;
 
-    const viewportHeight = await this.page.evaluate(() => window.innerHeight);
-    const totalHeight = await this.page.evaluate(
-      () => document.body.scrollHeight,
-    );
-    let currentPosition = 0;
+  //   const viewportHeight = await this.page.evaluate(() => window.innerHeight);
+  //   const totalHeight = await this.page.evaluate(
+  //     () => document.body.scrollHeight,
+  //   );
+  //   let currentPosition = 0;
 
-    while (currentPosition < totalHeight) {
-      // 使用更自然的滚动距离
-      const scrollDistance = random(200, 400);
-      currentPosition += scrollDistance;
+  //   while (currentPosition < totalHeight) {
+  //     // 使用更自然的滚动距离
+  //     const scrollDistance = random(200, 400);
+  //     currentPosition += scrollDistance;
 
-      // 使用平滑滚动
-      await this.page.evaluate((distance) => {
-        window.scrollBy({
-          top: distance,
-          behavior: 'smooth',
-        });
-      }, scrollDistance);
+  //     // 使用平滑滚动
+  //     await this.page.evaluate((distance) => {
+  //       window.scrollBy({
+  //         top: distance,
+  //         behavior: 'smooth',
+  //       });
+  //     }, scrollDistance);
 
-      // 使用更自然的停留时间
-      await new Promise((resolve) => setTimeout(resolve, random(800, 1500)));
+  //     // 使用更自然的停留时间
+  //     await new Promise((resolve) => setTimeout(resolve, random(800, 1500)));
 
-      // 偶尔进行小幅回滚
-      if (Math.random() > 0.8) {
-        await this.page.evaluate(() => {
-          window.scrollBy({
-            top: random(-30, 30),
-            behavior: 'smooth',
-          });
-        });
-      }
-    }
-  }
+  //     // 偶尔进行小幅回滚
+  //     if (Math.random() > 0.8) {
+  //       await this.page.evaluate(() => {
+  //         window.scrollBy({
+  //           top: random(-30, 30),
+  //           behavior: 'smooth',
+  //         });
+  //       });
+  //     }
+  //   }
+  // }
 
-  // 模拟人类点击行为
-  private async humanClick(selector: string) {
-    if (!this.page || !this.cursor) return;
+  // // 模拟人类点击行为
+  // private async humanClick(selector: string) {
+  //   if (!this.page || !this.cursor) return;
 
-    const element = await this.page.$(selector);
-    if (!element) return;
+  //   const element = await this.page.$(selector);
+  //   if (!element) return;
 
-    // 使用更自然的点击延迟
-    await this.cursor.click(element, {
-      waitForClickable: true,
-      moveDelay: random(200, 800),
-      clickDelay: random(100, 300),
-    });
-  }
+  //   // 使用更自然的点击延迟
+  //   await this.cursor.click(element, {
+  //     waitForClickable: true,
+  //     moveDelay: random(200, 800),
+  //     clickDelay: random(100, 300),
+  //   });
+  // }
 
   async crawl(
     url: string,
