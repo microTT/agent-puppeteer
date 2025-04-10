@@ -323,9 +323,9 @@ export class WebCrawler {
           // 使用更温和的加载策略
           console.log('使用温和方式加载页面...');
           await this.page.goto('about:blank');
-          await this.page.evaluate(() => {
-            window.location.href = url;
-          });
+          await this.page.evaluate((targetUrl) => {
+            window.location.href = targetUrl;
+          }, url);
           await this.page.waitForNavigation({
             waitUntil: 'domcontentloaded',
             timeout: options.timeout || this.DEFAULT_TIMEOUT
