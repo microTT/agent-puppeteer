@@ -1,20 +1,16 @@
 module.exports = {
   apps: [
     {
-      name: 'puppeteer-service',
-      script: './dist/server.js',
+      name: 'agent-puppeteer',
+      script: 'node_modules/next/dist/bin/next',
+      args: 'start -p 6102',
       instances: 1,
       autorestart: true,
       watch: false,
       max_memory_restart: '1G',
       env: {
-        NODE_ENV: 'development',
-        PORT: 6102
-      },
-      env_production: {
         NODE_ENV: 'production',
-        PORT: 6102
-      }
-    }
-  ]
+      },
+    },
+  ],
 }; 
