@@ -10,7 +10,7 @@ set -x
 cd "$(dirname "$0")/.."
 
 # 安装依赖
-npm install
+npm install --verbose
 
 # 编译 TypeScript
 npm run build
