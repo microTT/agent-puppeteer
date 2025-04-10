@@ -88,29 +88,44 @@ export class WebCrawler {
       await this.init(options);
     }
 
-    try {
-      if (!this.page) throw new Error('Page not initialized');
+    const maxRetries = 3;
+    let retryCount = 0;
 
-      // 设置超时时间
-      if (options.timeout) {
-        this.page.setDefaultTimeout(options.timeout);
+    while (retryCount < maxRetries) {
+      try {
+        if (!this.page) throw new Error('Page not initialized');
+
+        // 设置超时时间
+        if (options.timeout) {
+          this.page.setDefaultTimeout(options.timeout);
+        }
+
+        // 访问页面
+        await this.page.goto(url, { 
+          waitUntil: 'networkidle0',
+          timeout: 30000 
+        });
+
+        // 如果需要等待特定元素
+        if (options.waitForSelector) {
+          await this.page.waitForSelector(options.waitForSelector, { timeout: 10000 });
+        }
+
+        // 获取页面内容
+        return await this.extractContent();
+      } catch (error) {
+        retryCount++;
+        if (retryCount === maxRetries) {
+          throw new Error(
+            `爬取失败: ${error instanceof Error ? error.message : '未知错误'}`,
+          );
+        }
+        // 重新初始化浏览器
+        await this.close();
+        await this.init(options);
       }
-
-      // 访问页面
-      await this.page.goto(url, { waitUntil: 'networkidle0' });
-
-      // 如果需要等待特定元素
-      if (options.waitForSelector) {
-        await this.page.waitForSelector(options.waitForSelector);
-      }
-
-      // 获取页面内容
-      return await this.extractContent();
-    } catch (error) {
-      throw new Error(
-        `爬取失败: ${error instanceof Error ? error.message : '未知错误'}`,
-      );
     }
+    throw new Error('爬取失败: 达到最大重试次数');
   }
 
   private async extractContent(): Promise<CrawlerResult> {
