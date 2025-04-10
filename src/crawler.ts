@@ -321,24 +321,15 @@ export class WebCrawler {
           }
 
           // 使用更温和的加载策略
-          try {
-            // 先尝试直接访问
-            await this.page.goto(url, {
-              waitUntil: 'domcontentloaded',
-              timeout: options.timeout || this.DEFAULT_TIMEOUT
-            });
-          } catch (error) {
-            // 如果直接访问失败，尝试使用更温和的方式
-            console.log('直接访问失败，尝试使用更温和的方式...');
-            await this.page.goto('about:blank');
-            await this.page.evaluate(() => {
-              window.location.href = url;
-            });
-            await this.page.waitForNavigation({
-              waitUntil: 'domcontentloaded',
-              timeout: options.timeout || this.DEFAULT_TIMEOUT
-            });
-          }
+          console.log('使用温和方式加载页面...');
+          await this.page.goto('about:blank');
+          await this.page.evaluate(() => {
+            window.location.href = url;
+          });
+          await this.page.waitForNavigation({
+            waitUntil: 'domcontentloaded',
+            timeout: options.timeout || this.DEFAULT_TIMEOUT
+          });
 
           // 等待页面稳定
           await this.page.waitForFunction(() => {
