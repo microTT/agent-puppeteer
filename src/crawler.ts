@@ -44,7 +44,7 @@ export class WebCrawler {
           '--use-mock-keychain',
         ],
         defaultViewport: chromium.defaultViewport,
-        executablePath: await chromium.executablePath,
+        executablePath: await chromium.executablePath(),
         headless: chromium.headless,
         ignoreHTTPSErrors: true,
       };
