@@ -17,3 +17,4 @@ AUTHORS
 .faas_debug_tmp
 env.json
 package-lock.json
+.next
