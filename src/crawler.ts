@@ -1,7 +1,6 @@
-import type { Browser, Page } from 'puppeteer-core';
-import puppeteer from 'puppeteer-core';
+import type { Browser, Page } from 'puppeteer';
+import puppeteer from 'puppeteer';
 import { CrawlerOptions, CrawlerResult } from './types';
-import * as path from 'path';
 
 export class WebCrawler {
   private browser: Browser | null = null;
@@ -42,7 +41,6 @@ export class WebCrawler {
           '--password-store=basic',
           '--use-mock-keychain',
         ],
-        executablePath: path.join(process.cwd(), '.local-chrome', 'chrome', 'chrome'),
         headless: true,
         ignoreHTTPSErrors: true,
       };

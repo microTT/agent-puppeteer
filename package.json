@@ -7,7 +7,7 @@
     "node-fetch": "^3.3.1",
     "openai": "^3.2.1",
     "winston": "^3.17.0",
-    "puppeteer-core": "^21.7.0",
+    "puppeteer": "^21.7.0",
     "ghost-cursor": "^1.1.5",
     "lodash": "^4.17.21"
   },
@@ -19,9 +19,7 @@
     "start:dev": "./scripts/start.sh",
     "stop": "./scripts/stop.sh",
     "test": "jest",
-    "test:watch": "jest --watch",
-    "install-chrome": "sudo yum install -y libX11 libXcomposite libXcursor libXdamage libXext libXi libXtst cups-libs libXScrnSaver libXrandr alsa-lib pango atk at-spi2-atk gtk3 && mkdir -p .local-chrome && curl -L https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -o .local-chrome/chrome.deb && ar x .local-chrome/chrome.deb data.tar.xz && tar xf data.tar.xz && mv opt/google/chrome .local-chrome/ && rm -rf data.tar.xz opt .local-chrome/chrome.deb",
-    "uninstall-chrome": "rm -rf .local-chrome"
+    "test:watch": "jest --watch"
   },
   "devDependencies": {
     "@types/express": "^4.17.21",
