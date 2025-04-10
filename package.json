@@ -20,7 +20,8 @@
     "stop": "./scripts/stop.sh",
     "test": "jest",
     "test:watch": "jest --watch",
-    "install-chrome": "mkdir -p .local-chrome && curl -L https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -o .local-chrome/chrome.deb && ar x .local-chrome/chrome.deb data.tar.xz && tar xf data.tar.xz && mv opt/google/chrome .local-chrome/ && rm -rf data.tar.xz opt .local-chrome/chrome.deb"
+    "install-chrome": "sudo yum install -y libX11 libXcomposite libXcursor libXdamage libXext libXi libXtst cups-libs libXScrnSaver libXrandr alsa-lib pango atk at-spi2-atk gtk3 && mkdir -p .local-chrome && curl -L https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -o .local-chrome/chrome.deb && ar x .local-chrome/chrome.deb data.tar.xz && tar xf data.tar.xz && mv opt/google/chrome .local-chrome/ && rm -rf data.tar.xz opt .local-chrome/chrome.deb",
+    "uninstall-chrome": "rm -rf .local-chrome"
   },
   "devDependencies": {
     "@types/express": "^4.17.21",
