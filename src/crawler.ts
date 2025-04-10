@@ -1,7 +1,7 @@
 import type { Browser, Page } from 'puppeteer-core';
 import puppeteer from 'puppeteer-core';
-import chromium from '@sparticuz/chromium';
 import { CrawlerOptions, CrawlerResult } from './types';
+import * as path from 'path';
 
 export class WebCrawler {
   private browser: Browser | null = null;
@@ -18,7 +18,6 @@ export class WebCrawler {
     if (!this.browser) {
       const launchOptions = {
         args: [
-          ...chromium.args,
           '--no-sandbox',
           '--disable-setuid-sandbox',
           '--disable-blink-features=AutomationControlled',
@@ -43,9 +42,8 @@ export class WebCrawler {
           '--password-store=basic',
           '--use-mock-keychain',
         ],
-        defaultViewport: chromium.defaultViewport,
-        executablePath: await chromium.executablePath(),
-        headless: chromium.headless,
+        executablePath: path.join(process.cwd(), '.local-chrome', 'chrome', 'chrome'),
+        headless: true,
         ignoreHTTPSErrors: true,
       };
 

@@ -8,17 +8,19 @@
     "openai": "^3.2.1",
     "winston": "^3.17.0",
     "puppeteer-core": "^21.7.0",
-    "@sparticuz/chromium": "^119.0.0",
     "ghost-cursor": "^1.1.5",
     "lodash": "^4.17.21"
   },
   "scripts": {
     "start": "ts-node src/server.ts",
-    "build": "npx tsc",
+    "build": "node_modules/.bin/tsc",
     "dev": "nodemon --exec ts-node src/server.ts",
     "start:prod": "NODE_ENV=production ./scripts/start.sh",
     "start:dev": "./scripts/start.sh",
-    "stop": "./scripts/stop.sh"
+    "stop": "./scripts/stop.sh",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "install-chrome": "mkdir -p .local-chrome && curl -L https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -o .local-chrome/chrome.deb && ar x .local-chrome/chrome.deb data.tar.xz && tar xf data.tar.xz && mv opt/google/chrome .local-chrome/ && rm -rf data.tar.xz opt .local-chrome/chrome.deb"
   },
   "devDependencies": {
     "@types/express": "^4.17.21",
@@ -33,6 +35,9 @@
     "pm2": "^5.4.3",
     "prettier": "^2.8.8",
     "ts-node": "^10.9.2",
-    "typescript": "^5.0.4"
+    "typescript": "^5.0.4",
+    "@types/jest": "^29.5.12",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.1.2"
   }
 }
