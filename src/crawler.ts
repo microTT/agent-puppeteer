@@ -68,31 +68,45 @@ export class WebCrawler {
 
         // 设置更完整的请求头
         await this.page.setExtraHTTPHeaders({
-          'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7',
-          'Accept-Encoding': 'gzip, deflate, br',
-          'Accept-Language': 'zh-CN,zh;q=0.9,en;q=0.8',
+          'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7',
+          'Accept-Language': 'zh-CN,zh;q=0.9',
           'Cache-Control': 'no-cache',
           'Connection': 'keep-alive',
+          'DNT': '1',
           'Pragma': 'no-cache',
-          'Sec-Ch-Ua': '"Not_A Brand";v="8", "Chromium";v="120", "Google Chrome";v="120"',
-          'Sec-Ch-Ua-Mobile': '?0',
-          'Sec-Ch-Ua-Platform': '"macOS"',
           'Sec-Fetch-Dest': 'document',
           'Sec-Fetch-Mode': 'navigate',
-          'Sec-Fetch-Site': 'none',
+          'Sec-Fetch-Site': 'same-origin',
           'Sec-Fetch-User': '?1',
           'Upgrade-Insecure-Requests': '1',
-          'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
-          'Referer': 'https://www.google.com/',
-          'Origin': 'https://www.google.com'
+          // 'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36',
+          'sec-ch-ua': '"Google Chrome";v="135", "Not-A.Brand";v="8", "Chromium";v="135"',
+          'sec-ch-ua-mobile': '?0',
+          'sec-ch-ua-platform': '"macOS"',
         });
 
-        // 设置 Cookie
-        await this.page.setCookie({
-          name: 'cf_clearance',
-          value: 'your_cf_clearance_cookie', // 需要替换为实际的 cookie
-          domain: '.target-domain.com' // 需要替换为目标域名
-        });
+        // Cookie 需要单独设置
+        // await this.page.setCookie({
+        //   name: 'taotieDeviceId',
+        //   value: '18f36f1d-42ff-471d-189b-9abe2c718ccc',
+        //   domain: '.wallstreetcn.com'
+        // }, {
+        //   name: '_ga',
+        //   value: 'GA1.1.1465859083.1714613770',
+        //   domain: '.wallstreetcn.com'
+        // }, {
+        //   name: 'Hm_lvt_c9477ef9d8ebaa27c94f86cc3f505fa5',
+        //   value: '1737805537',
+        //   domain: '.wallstreetcn.com'
+        // }, {
+        //   name: 'sl-session',
+        //   value: 'uriCD6FW+2fiOHFIGmXK1Q==',
+        //   domain: '.wallstreetcn.com'
+        // }, {
+        //   name: '_ga_4VH50R2B8W',
+        //   value: 'GS1.1.1744438562.5.1.1744438704.51.0.0',
+        //   domain: '.wallstreetcn.com'
+        // });
 
         // 注入反检测脚本
         await this.page.evaluateOnNewDocument(() => {
