@@ -11,14 +11,16 @@
     "stop": "./scripts/stop.sh"
   },
   "dependencies": {
-    "next": "14.1.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "puppeteer": "^21.7.0",
-    "typescript": "^5.3.3",
-    "@types/node": "^20.11.0",
-    "@types/react": "^18.2.0",
-    "@types/react-dom": "^18.2.0",
-    "pm2": "^5.3.1"
+    "next": "15.3.0",
+    "pm2": "^6.0.5",
+    "puppeteer": "^24.6.1",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.14.1",
+    "@types/react": "^19.1.1",
+    "@types/react-dom": "^19.1.2",
+    "typescript": "^5.8.3"
   }
 }
